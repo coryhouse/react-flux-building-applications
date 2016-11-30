@@ -22,7 +22,7 @@ var About = React.createClass({
 		return (
 			<div>
 				<h1>About</h1>
-				<p>
+				<div>
 					This application uses the following technologies:
 					<ul>
 						<li>React</li>
@@ -33,7 +33,7 @@ var About = React.createClass({
 						<li>Browserify</li>
 						<li>Bootstrap</li>
 					</ul>
-				</p>
+				</div>
 			</div>
 		); 
 	}
