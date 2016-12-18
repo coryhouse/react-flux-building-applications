@@ -1,23 +1,26 @@
 "use strict";
 
 var React = require('react');
-var Router = require('react-router');
+var ReactRouter = require('react-router');
+var withRouter = ReactRouter.withRouter;
+var browserHistory = ReactRouter.browserHistory;
 var AuthorForm = require('./authorForm');
 var AuthorActions = require('../../actions/authorActions');
 var AuthorStore = require('../../stores/authorStore');
 var toastr = require('toastr');
 
 var ManageAuthorPage = React.createClass({
-	mixins: [
-		Router.Navigation
-	],
+	componentDidMount: function() {
+		this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave);
+	},
 
-	statics: {
-		willTransitionFrom: function(transition, component) {
-			if (component.state.dirty && !confirm('Leave without saving?')) {
-				transition.abort();
-			}
+	routerWillLeave: function(nextLocation) {
+		// Return false to prevent a transition w/o prompting the user,
+		// or return a string to allow the user to decide:
+		if (this.state.dirty) {
+			return 'Leave without saving?';
 		}
+		return true;
 	},
 
 	getInitialState: function() {
@@ -74,9 +77,10 @@ var ManageAuthorPage = React.createClass({
 			AuthorActions.createAuthor(this.state.author);
 		}
 		
-		this.setState({dirty: false});
-		toastr.success('Author saved.');
-		this.transitionTo('authors');
+		this.setState({dirty: false}, function() {
+			toastr.success('Author saved.');
+			browserHistory.push('/authors');
+		});
 	},
 
 	render: function() {
@@ -90,4 +94,6 @@ var ManageAuthorPage = React.createClass({
 	}
 });
 
-module.exports = ManageAuthorPage;
+// Using withRouter higher order component to wrap ManageAuthorPage
+// to notify the user when attempting to navigate away when the form is dirty.
+module.exports = withRouter(ManageAuthorPage);
