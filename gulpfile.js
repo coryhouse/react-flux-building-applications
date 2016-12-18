@@ -48,7 +48,7 @@ gulp.task('html', function() {
 
 gulp.task('js', function() {
 	browserify(config.paths.mainJs)
-		.transform("babelify", {presets: ["latest", "react"]})
+		.transform("babelify", {presets: ["react"]})
 		.bundle()
 		.on('error', console.error.bind(console))
 		.pipe(source('bundle.js'))
@@ -76,7 +76,7 @@ gulp.task('images', function () {
 
 gulp.task('lint', function() {
 	return gulp.src(config.paths.js)
-		.pipe(lint({config: 'eslint.config.json'}))
+		.pipe(lint({config: '.eslintrc'}))
 		.pipe(lint.format());
 });
 
