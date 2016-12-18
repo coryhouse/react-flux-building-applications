@@ -1,25 +1,48 @@
 "use strict";
 
 var React = require('react');
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var browserHistory = ReactRouter.browserHistory;
+var IndexRoute = ReactRouter.IndexRoute;
+var Route = ReactRouter.Route;
+var Redirect = ReactRouter.Redirect;
 
-var Router = require('react-router');
-var DefaultRoute = Router.DefaultRoute;
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var Redirect = Router.Redirect;
+// Components
+var App = require('./components/app');
+var HomePage = require('./components/homePage');
+var Authors = require('./components/authors/authorPage');
+var ManageAuthorPage = require('./components/authors/manageAuthorPage');
+var AboutPage = require('./components/about/aboutPage');
+var NotFoundPage = require('./components/notFoundPage');
 
 var routes = (
-  <Route name="app" path="/" handler={require('./components/app')}>
-    <DefaultRoute handler={require('./components/homePage')} />
-    <Route name="authors" handler={require('./components/authors/authorPage')} />
-    <Route name="addAuthor" path="author" handler={require('./components/authors/manageAuthorPage')} />
-    <Route name="manageAuthor" path="author/:id" handler={require('./components/authors/manageAuthorPage')} />
-    <Route name="about" handler={require('./components/about/aboutPage')} />
-    <NotFoundRoute handler={require('./components/notFoundPage')} />
-    <Redirect from="about-us" to="about" />
-    <Redirect from="awthurs" to="authors" />
-    <Redirect from="about/*" to="about" />
-  </Route>
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={HomePage} />
+      <Route path="authors" component={Authors} />
+      <Route path="author" component={ManageAuthorPage} />
+      <Route path="author/:id" component={ManageAuthorPage} />
+      <Route path="about" 
+        component={AboutPage} 
+        onEnter={function(location, replaceWith) {
+			    if (!confirm('Are you sure you want to read a page that\'s this boring?')) {
+				    transition.abort();
+          }
+        }
+        }
+        onLeave={function() {
+          if (!confirm('Are you sure you want to leave a page that\'s this exciting?')) {
+            return false;
+          }
+        }
+		  }/>
+      <Redirect from="about-us" to="about" />
+      <Redirect from="awthurs" to="authors" />
+      <Redirect from="about/*" to="about" />
+      <Route path="*" component={NotFoundPage} />
+    </Route>
+  </Router>
 );
 
 module.exports = routes;
