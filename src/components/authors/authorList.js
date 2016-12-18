@@ -1,8 +1,7 @@
 "use strict";
 
 var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+var Link = require('react-router').Link;
 var AuthorActions = require('../../actions/authorActions');
 var toastr = require('toastr');
 
@@ -22,7 +21,7 @@ var AuthorList = React.createClass({
 			return (
 				<tr key={author.id}>
 					<td><a href="#" onClick={this.deleteAuthor.bind(this, author.id)}>Delete</a></td>
-					<td><Link to="manageAuthor" params={{id: author.id}}>{author.id}</Link></td>
+					<td><Link to={"author/" + author.id}>{author.id}</Link></td>
 					<td>{author.firstName} {author.lastName}</td>
 				</tr>
 			);
