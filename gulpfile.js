@@ -7,6 +7,7 @@ var browserify = require('browserify'); // Bundles JS
 var source = require('vinyl-source-stream'); // Use conventional text streams with Gulp
 var concat = require('gulp-concat'); //Concatenates files
 var lint = require('gulp-eslint'); //Lint JS files, including JSX
+var historyApiFallback = require('connect-history-api-fallback'); //Load index.html regardless of what's in the URL
 
 var config = {
 	port: 9005,
@@ -29,6 +30,9 @@ var config = {
 gulp.task('connect', function() {
 	connect.server({
 		root: ['dist'],
+		middleware: function(connect, opt) {
+			return [ historyApiFallback() ];
+		},
 		port: config.port,
 		base: config.devBaseUrl,
 		livereload: true
