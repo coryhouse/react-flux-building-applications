@@ -23,20 +23,7 @@ var routes = (
       <Route path="authors" component={Authors} />
       <Route path="author" component={ManageAuthorPage} />
       <Route path="author/:id" component={ManageAuthorPage} />
-      <Route path="about" 
-        component={AboutPage} 
-        onEnter={function(location, replaceWith) {
-			    if (!confirm('Are you sure you want to read a page that\'s this boring?')) {
-				    transition.abort();
-          }
-        }
-        }
-        onLeave={function() {
-          if (!confirm('Are you sure you want to leave a page that\'s this exciting?')) {
-            return false;
-          }
-        }
-		  }/>
+      <Route path="about" component={AboutPage} />
       <Redirect from="about-us" to="about" />
       <Redirect from="awthurs" to="authors" />
       <Redirect from="about/*" to="about" />
