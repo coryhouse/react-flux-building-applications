@@ -2,6 +2,15 @@ import Dispatcher from '../dispatcher/appDispatcher';
 import AuthorApi from '../api/authorApi';
 import ActionTypes from '../constants/actionTypes';
 
+export function loadCourses() {
+    AuthorApi.getAllAuthors().then( authors => {
+        Dispatcher.dispatch({
+            actionType: ActionTypes.LOAD_COURSES,
+            authors
+        });
+    })
+}
+
 export function createCourse(course) {
     var newCourse = CourseApi.save(course);
 

@@ -30,8 +30,8 @@ const CourseStore = Object.assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action) {
 	switch(action.actionType) {
-		case ActionTypes.INITIALIZE:
-			_courses = action.initialData.courses;
+		case ActionTypes.LOAD_COURSES:
+			_courses = action.courses;
 			CourseStore.emitChange();
 			break;
 		case ActionTypes.CREATE_COURSE:
@@ -39,8 +39,8 @@ Dispatcher.register(function(action) {
 			CourseStore.emitChange();
 			break;
 		case ActionTypes.UPDATE_COURSE:
-			var existingCourse = _.find(_courses, {id: action.course.id});
-			var existingCourseIndex = _.indexOf(_courses, existingCourse); 
+			const existingCourse = _.find(_courses, {id: action.course.id});
+			const existingCourseIndex = _.indexOf(_courses, existingCourse); 
 			_courses.splice(existingCourseIndex, 1, action.course);
 			CourseStore.emitChange();
 			break;	
