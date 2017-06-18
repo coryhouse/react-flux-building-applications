@@ -1,15 +1,12 @@
-"use strict";
+import Dispatcher from '../dispatcher/appDispatcher';
+import ActionTypes from '../constants/actionTypes';
+import {EventEmitter} from 'events';
+import _ from 'lodash';
+const CHANGE_EVENT = 'change';
 
-var Dispatcher = require('../dispatcher/appDispatcher');
-var ActionTypes = require('../constants/actionTypes');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var _ = require('lodash');
-var CHANGE_EVENT = 'change';
+const _authors = [];
 
-var _authors = [];
-
-var AuthorStore = assign({}, EventEmitter.prototype, {
+const AuthorStore = Object.assign({}, EventEmitter.prototype, {
 	addChangeListener: function(callback) {
 		this.on(CHANGE_EVENT, callback);
 	},
@@ -58,4 +55,4 @@ Dispatcher.register(function(action) {
 	}
 });
 
-module.exports = AuthorStore;
+export default AuthorStore;

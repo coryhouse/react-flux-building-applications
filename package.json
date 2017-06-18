@@ -1,29 +1,22 @@
 {
   "name": "psadmin",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Cory House",
-  "license": "ISC",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "browserify": "^11.0.1",
-    "flux": "^2.0.3",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-eslint": "^0.15.0",
-    "gulp-open": "^1.0.0",
-    "jquery": "^2.1.4",
-    "lodash": "^3.10.0",
-    "object-assign": "^3.0.0",
-    "react": "^0.13.3",
-    "react-router": "^0.13.3",
-    "reactify": "^1.1.1",
-    "toastr": "^2.1.0",
-    "vinyl-source-stream": "^1.1.0"
+    "material-ui": "^0.18.3",
+    "prettier": "^1.4.4",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.1",
+    "react-tap-event-plugin": "^2.0.1"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

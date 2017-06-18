@@ -1,67 +1,55 @@
-"use strict";
+import React from 'react';
+import Router from 'react-router';
+import AuthorForm from './authorForm';
+import AuthorActions from '../../actions/authorActions';
+import AuthorStore from '../../stores/authorStore';
+import toastr from 'toastr';
 
-var React = require('react');
-var Router = require('react-router');
-var AuthorForm = require('./authorForm');
-var AuthorActions = require('../../actions/authorActions');
-var AuthorStore = require('../../stores/authorStore');
-var toastr = require('toastr');
+class ManageAuthorPage extends React.Component {
+	constructor(props) {
+		super(props);
 
-var ManageAuthorPage = React.createClass({
-	mixins: [
-		Router.Navigation
-	],
-
-	statics: {
-		willTransitionFrom: function(transition, component) {
-			if (component.state.dirty && !confirm('Leave without saving?')) {
-				transition.abort();
-			}
-		}
-	},
-
-	getInitialState: function() {
-		return {
+		this.state = {
 			author: { id: '', firstName: '', lastName: '' },
 			errors: {},
 			dirty: false
 		};
-	},
+	}
 
-	componentWillMount: function() {
+	componentDidMount() {
 		var authorId = this.props.params.id; //from the path '/author:id'
 		if (authorId) {
 			this.setState({author: AuthorStore.getAuthorById(authorId) });
 		}
-	},
+	}
 
-	setAuthorState: function(event) {
-		this.setState({dirty: true});
-		var field = event.target.name;
-		var value = event.target.value;
-		this.state.author[field] = value;
-		return this.setState({author: this.state.author});
-	},
+	setAuthorState({target}) {
+		// copy state since it's immutable
+		const author = Object.assign({}, this.state.author);
+		author[target.name] = target.value;
+		this.setState({author, dirty: true});
+	}
 
-	authorFormIsValid: function() {
+	authorFormIsValid = () => {
 		var formIsValid = true;
-		this.state.errors = {}; //clear any previous errors.
+		const errors = {};
+		const {author} = this.state;
 
-		if (this.state.author.firstName.length < 3) {
-			this.state.errors.firstName = 'First name must be at least 3 characters.';
+		if (author.firstName.length < 3) {
+			errors.firstName = 'First name must be at least 3 characters.';
 			formIsValid = false;
 		}
 
-		if (this.state.author.lastName.length < 3) {
-			this.state.errors.lastName = 'Last name must be at least 3 characters.';
+		if (author.lastName.length < 2) {
+			errors.lastName = 'Last name must be at least 2 characters.';
 			formIsValid = false;
 		}
 
-		this.setState({errors: this.state.errors});
+		this.setState({errors});
 		return formIsValid;
-	},
+	}
 
-	saveAuthor: function(event) {
+	saveAuthor(event) {
 		event.preventDefault();
 
 		if (!this.authorFormIsValid()) {
@@ -77,9 +65,9 @@ var ManageAuthorPage = React.createClass({
 		this.setState({dirty: false});
 		toastr.success('Author saved.');
 		this.transitionTo('authors');
-	},
+	}
 
-	render: function() {
+	render() {
 		return (
 			<AuthorForm
 				author={this.state.author}
@@ -88,6 +76,6 @@ var ManageAuthorPage = React.createClass({
 				errors={this.state.errors} />
 		);
 	}
-});
+}
 
-module.exports = ManageAuthorPage;
+export default ManageAuthorPage;

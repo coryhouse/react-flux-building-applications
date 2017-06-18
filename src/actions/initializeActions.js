@@ -1,10 +1,8 @@
-"use strict";
+import Dispatcher from '../dispatcher/appDispatcher';
+import ActionTypes from '../constants/actionTypes';
+import AuthorApi from '../api/authorApi';
 
-var Dispatcher = require('../dispatcher/appDispatcher');
-var ActionTypes = require('../constants/actionTypes');
-var AuthorApi = require('../api/authorApi');
-
-var InitializeActions = {
+const InitializeActions = {
 	initApp: function() {
 		Dispatcher.dispatch({
 			actionType: ActionTypes.INITIALIZE,
@@ -15,4 +13,4 @@ var InitializeActions = {
 	}
 };
 
-module.exports = InitializeActions;
+export default InitializeActions;

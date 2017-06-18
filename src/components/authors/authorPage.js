@@ -1,33 +1,39 @@
-"use strict";
+import React from 'react';
+import Router from 'react-router';
+import {Link} from Router;
+import AuthorStore from '../../stores/authorStore';
+import AuthorActions from '../../actions/authorActions';
+import AuthorList from './authorList';
 
-var React = require('react');
-var Router = require('react-router');
-var Link = require('react-router').Link;
-var AuthorStore = require('../../stores/authorStore');
-var AuthorActions = require('../../actions/authorActions');
-var AuthorList = require('./authorList');
+class AuthorPage extends React.Component {
+	constructor(props) {
+		super(props);
 
-var AuthorPage = React.createClass({
-	getInitialState: function() {
+		this.state = {
+			authors: []
+		};
+	}
+
+	componentDidMount() {
 		return {
 			authors: AuthorStore.getAllAuthors()
 		};
-	},
+	}
 
-	componentWillMount: function() {
+	componentWillMount() {
 		AuthorStore.addChangeListener(this._onChange);
-	},
+	}
 
 	//Clean up when this component is unmounted
-	componentWillUnmount: function() {
+	componentWillUnmount() {
 		AuthorStore.removeChangeListener(this._onChange);
-	},
+	}
 
-	_onChange: function() {
+	_onChange() {
 		this.setState({ authors: AuthorStore.getAllAuthors() });
-	},
+	}
 
-	render: function() {
+	render() {
 		return (
 			<div>
 				<h1>Authors</h1>
@@ -36,6 +42,6 @@ var AuthorPage = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
-module.exports = AuthorPage;
+export default AuthorPage;

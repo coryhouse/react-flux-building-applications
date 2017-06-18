@@ -1,38 +1,39 @@
-"use strict";
+import React from 'react';
+import PropTypes from 'prop-types';
+import TextInput from '../common/TextInput';
 
-var React = require('react');
-var Input = require('../common/textInput');
+function AuthorForm({author, onChange, errors, onSave}) {
+	return (
+		<form>
+			<h1>Manage Author</h1>
+			<TextInput
+				name="firstName"
+				label="First Name"
+				value={author.firstName}
+				onChange={onChange}
+				error={errors.firstName} />
 
-var AuthorForm = React.createClass({
-	propTypes: {
-		author:	React.PropTypes.object.isRequired,
-		onSave:	React.PropTypes.func.isRequired,
-		onChange: React.PropTypes.func.isRequired,
-		errors: React.PropTypes.object
-	},
+			<TextInput
+				name="lastName"
+				label="Last Name"
+				value={author.lastName}
+				onChange={onChange}
+				error={errors.lastName} />
 
-	render: function() {
-		return (
-			<form>
-				<h1>Manage Author</h1>
-				<Input
-					name="firstName"
-					label="First Name"
-					value={this.props.author.firstName}
-					onChange={this.props.onChange}
-					error={this.props.errors.firstName} />
+			<input 
+				type="submit" 
+				value="Save" 
+				className="btn btn-default" 
+				onClick={onSave} />
+		</form>
+	);
+};
 
-				<Input
-					name="lastName"
-					label="Last Name"
-					value={this.props.author.lastName}
-					onChange={this.props.onChange}
-					error={this.props.errors.lastName} />
+AuthorForm.propTypes = {
+	author:	PropTypes.object.isRequired,
+	onSave:	PropTypes.func.isRequired,
+	onChange: PropTypes.func.isRequired,
+	errors: PropTypes.object
+};
 
-				<input type="submit" value="Save" className="btn btn-default" onClick={this.props.onSave} />
-			</form>
-		);
-	}
-});
-
-module.exports = AuthorForm;
+export default AuthorForm;
