@@ -39,11 +39,10 @@ var ManageAuthorPage = React.createClass({
 	},
 
 	setAuthorState: function(event) {
-		this.setState({dirty: true});
-		var field = event.target.name;
-		var value = event.target.value;
-		this.state.author[field] = value;
-		return this.setState({author: this.state.author});
+		// copy state since it's immutable
+		const author = Object.assign({}, this.state.author);
+		author[event.target.name] = event.target.value;
+		this.setState({author, dirty: true});
 	},
 
 	authorFormIsValid: function() {
