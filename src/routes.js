@@ -1,12 +1,6 @@
-"use strict";
-
-var React = require('react');
-
-var Router = require('react-router');
-var DefaultRoute = Router.DefaultRoute;
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var Redirect = Router.Redirect;
+import React from 'react';
+import Router from 'react-router';
+import {DefaultRoute, Route, NotFoundRoute, Redirect} from Router;
 
 var routes = (
   <Route name="app" path="/" handler={require('./components/app')}>
@@ -22,4 +16,4 @@ var routes = (
   </Route>
 );
 
-module.exports = routes;
+export default routes;
