@@ -3,7 +3,7 @@ import Router from 'react-router';
 import {Link} from Router;
 import AuthorStore from '../../stores/authorStore';
 import AuthorActions from '../../actions/authorActions';
-import AuthorList from './authorList';
+import AuthorList from './AuthorList';
 
 class AuthorPage extends React.Component {
 	constructor(props) {
