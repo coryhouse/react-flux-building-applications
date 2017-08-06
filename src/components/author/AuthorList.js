@@ -30,14 +30,15 @@ class AuthorList extends React.Component {
 							<td>{author.firstName} {author.lastName}</td>
 						</tr>
 					)
-				}
+				})
 			}
 			</tbody>
 		</table>
 	}
+}
 
-	AuthorList.propTypes: {
-		authors: PropTypes.array.isRequired
-	};
+AuthorList.propTypes = {
+	authors: PropTypes.array.isRequired
+};
 
-	export default AuthorList;
+export default AuthorList;

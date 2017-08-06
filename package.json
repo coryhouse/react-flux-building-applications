@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "material-ui": "^0.18.3",
+    "jquery": "^3.2.1",
     "prettier": "^1.4.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
-    "react-tap-event-plugin": "^2.0.1"
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

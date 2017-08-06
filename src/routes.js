@@ -1,5 +1,4 @@
 import React from 'react';
-import Router from 'react-router';
 import {DefaultRoute, Route, NotFoundRoute, Redirect} from Router;
 
 var routes = (

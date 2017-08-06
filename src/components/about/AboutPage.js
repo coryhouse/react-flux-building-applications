@@ -13,7 +13,6 @@ function About() {
 					<li>Node</li>
 					<li>npm Scripts</li>
 					<li>Webpack</li>
-					<li>Material-UI</li>
 				</ul>
 			</p>
 		</div>
