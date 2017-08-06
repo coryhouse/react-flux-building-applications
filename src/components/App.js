@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { Tabs, Tab } from 'material-ui/Tabs';
 import Header from './common/Header';
 import HomePage from './HomePage';
 import CoursesPage from './course/CoursesPage';
