@@ -1,40 +1,40 @@
 import Dispatcher from '../dispatcher/appDispatcher';
-import AuthorApi from '../api/authorApi';
-import ActionTypes from '../constants/actionTypes';
+import {saveCourse, getAllCourses} from '../api/courseApi';
+import actionTypes from '../constants/actionTypes';
 
 export function loadCourses() {
-    AuthorApi.getAllAuthors().then( authors => {
+    getAllCourses().then(courses => {
         Dispatcher.dispatch({
-            actionType: ActionTypes.LOAD_COURSES,
-            authors
+            actionType: actionTypes.LOAD_COURSES,
+            courses
         });
     })
 }
 
 export function createCourse(course) {
-    var newCourse = CourseApi.save(course);
+    var newCourse = saveCourse(course);
 
     //Hey dispatcher, go tell all the stores that an author was just created.
     Dispatcher.dispatch({
-        actionType: ActionTypes.CREATE_COURSE,
-        author: newAuthor
+        actionType: actionTypes.CREATE_COURSE,
+        course: newCourse
     });
 }
 
-export function updateCourse(author) {
-    var updatedCourse = AuthorApi.saveAuthor(author);
+export function updateCourse(course) {
+    var updatedCourse = saveCourse(course);
 
     Dispatcher.dispatch({
-        actionType: ActionTypes.UPDATE_COURSE,
-        author: updatedAuthor
+        actionType: actionTypes.UPDATE_COURSE,
+        course: updatedCourse
     });
 }
 
-export function deleteAuthor(id) {
-    CourseApi.del(id);
+export function deleteCourse(id) {
+    deleteCourse(id);
 
     Dispatcher.dispatch({
-        actionType: ActionTypes.DELETE_COURSE,
+        actionType: actionTypes.DELETE_COURSE,
         id: id
     });
 }
