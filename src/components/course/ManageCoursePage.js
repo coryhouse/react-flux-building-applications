@@ -43,8 +43,8 @@ class ManageCoursePage extends React.Component {
 
   updateCourseState({ target }) {
     this.setState(prevState => {
-      const updatedCourse = { ...prevState.course, [target.name]: target.value };
-      return updatedCourse;
+      const course = { ...prevState.course, [target.name]: target.value };
+      return { course };
     });
   }
 
