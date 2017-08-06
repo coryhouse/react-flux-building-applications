@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './common/Header';
 import HomePage from './HomePage';
 import CoursesPage from './course/CoursesPage';
 import ManageCoursePage from './course/ManageCoursePage'; //eslint-disable-line import/no-named-as-default
 import AboutPage from './about/AboutPage';
+import NotFoundPage from './NotFoundPage';
 
 class App extends Component {
   constructor(props) {
@@ -24,11 +25,14 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <Header/>
-        <Route exact path="/" component={HomePage}/>
-        <Route path="/courses" component={CoursesPage}/>
-        <Route path="/course/:id" component={ManageCoursePage}/>
-        <Route path="/course" component={ManageCoursePage} exact />
-        <Route path="/about" component={AboutPage}/>
+        <Switch>
+          <Route exact path="/" component={HomePage}/>
+          <Route path="/courses" component={CoursesPage}/>
+          <Route path="/course" component={ManageCoursePage} exact />
+          <Route path="/course/:id" component={ManageCoursePage}/>
+          <Route path="/about" component={AboutPage}/>
+          <Route component={NotFoundPage}/>
+        </Switch>
       </div>
     );
   }
