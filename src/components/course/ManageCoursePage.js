@@ -2,21 +2,36 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import CourseForm from './CourseForm';
+import {getAllAuthors} from '../../api/authorApi';
 import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.state = {
-      course: Object.assign({}, props.course),
+      course: {
+        id: '',
+        title: '',
+        watchHref: '',
+        authorId: '',
+        length: '',
+        category: ''
+      },
+      authors: [],
       errors: {},
       saving: false,
-      redirectToCoursePage: true
+      redirectToCoursePage: false
     };
 
     this.updateCourseState = this.updateCourseState.bind(this);
     this.saveCourse = this.saveCourse.bind(this);
+  }
+
+  componentDidMount() {
+    getAllAuthors().then(authors => {
+     this.setState({authors});
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -69,12 +84,12 @@ class ManageCoursePage extends React.Component {
   }
 
   render() {
-    if (this.state.redirectToCoursePage) return <Redirect to={{ pathname: '/courses'}} />
+    if (this.state.redirectToCoursePage) return <Redirect to={{ pathname: '/courses' }} />
     return (
       <div>
         {this.state.course.title}
         <CourseForm
-          allAuthors={this.props.authors}
+          authors={this.state.authors}
           onChange={this.updateCourseState}
           onSave={this.saveCourse}
           course={this.state.course}
@@ -87,8 +102,7 @@ class ManageCoursePage extends React.Component {
 }
 
 ManageCoursePage.propTypes = {
-  course: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired,
+  course: PropTypes.object,
   actions: PropTypes.object.isRequired
 };
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
+const CourseForm = ({course, authors, onSave, onChange, saving, errors}) => {
   return (
     <form>
       <h1>Manage Course</h1>
@@ -19,8 +19,14 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
         label="Author"
         value={course.authorId}
         defaultOption="Select Author"
-        options={allAuthors}
-        onChange={onChange} error={errors.authorId}/>
+        options={authors.map( author => {
+          return {
+            value: author.id, 
+            text: author.firstName + ' ' + author.lastName
+          };
+        })}
+        onChange={onChange} 
+        error={errors.authorId}/>
 
       <TextInput
         name="category"
@@ -48,7 +54,7 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
 
 CourseForm.propTypes = {
   course: PropTypes.object.isRequired,
-  allAuthors: PropTypes.array.isRequired,
+  authors: PropTypes.array.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
