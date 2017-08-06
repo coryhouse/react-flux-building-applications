@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import CourseForm from './CourseForm';
 import {getAllAuthors} from '../../api/authorApi';
+import {updateCourse} from '../../actions/courseActions';
+
 import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component {
@@ -68,14 +70,8 @@ class ManageCoursePage extends React.Component {
       return;
     }
 
-    this.setState({ saving: true });
-
-    this.props.actions.saveCourse(this.state.course)
-      .then(() => this.redirect())
-      .catch(error => {
-        toastr.error(error);
-        this.setState({ saving: false });
-      });
+    updateCourse(this.state.course);
+    this.redirect();
   }
 
   redirect() {
@@ -103,7 +99,6 @@ class ManageCoursePage extends React.Component {
 
 ManageCoursePage.propTypes = {
   course: PropTypes.object,
-  actions: PropTypes.object.isRequired
 };
 
 export default ManageCoursePage;
