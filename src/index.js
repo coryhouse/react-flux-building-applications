@@ -4,7 +4,9 @@ import App from './components/App';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import {loadCourses} from './actions/courseActions';
+import {loadAuthors} from './actions/authorActions';
 
+loadAuthors();
 loadCourses();
 
 render(
