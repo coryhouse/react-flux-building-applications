@@ -31,24 +31,12 @@ class App extends Component {
           <Route path="/course" component={ManageCoursePage} exact />
           <Route path="/course/:id" component={ManageCoursePage}/>
           <Route path="/about" component={AboutPage}/>
+          <Route path="/404" component={NotFoundPage}/>
           <Route component={NotFoundPage}/>
         </Switch>
       </div>
     );
   }
-
-  // render() {
-  //   return (
-  //     <Tabs value={this.state.value} onChange={this.handleChange}>
-  //       <Tab label="Home" value="home">
-  //         <HomePage />
-  //       </Tab>
-  //       <Tab label="Courses" value="courses">
-  //         <CoursesPage />
-  //       </Tab>
-  //     </Tabs>
-  //   );
-  // }
 }
 
 export default App;
