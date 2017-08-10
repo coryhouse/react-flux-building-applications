@@ -30,8 +30,8 @@ const AuthorStore = Object.assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action) {
 	switch(action.actionType) {
-		case ActionTypes.INITIALIZE:
-			_authors = action.initialData.authors;
+		case ActionTypes.LOAD_AUTHORS:
+			_authors = action.authors;
 			AuthorStore.emitChange();
 			break;
 		case ActionTypes.CREATE_AUTHOR:
