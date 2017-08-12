@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const CourseForm = ({course, authors, onSave, onChange, saving, errors}) => {
+function CourseForm({course, authors, onSave, onChange, saving, errors}) {
   return (
     <form>
       <h1>Manage Course</h1>
