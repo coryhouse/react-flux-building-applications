@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import CourseForm from './CourseForm';
-import {getAllAuthors} from '../../api/authorApi';
+import courseStore from '../../stores/courseStore';
+import authorStore from '../../stores/authorStore';
 import {updateCourse} from '../../actions/courseActions';
-
 import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component {
@@ -20,10 +20,11 @@ class ManageCoursePage extends React.Component {
         length: '',
         category: ''
       },
-      authors: [],
+      authors: authorStore.getAllAuthors(),
       errors: {},
       saving: false,
-      redirectToCoursePage: false
+      redirectToCoursePage: false,
+      redirectTo404Page: false
     };
 
     this.updateCourseState = this.updateCourseState.bind(this);
@@ -31,13 +32,15 @@ class ManageCoursePage extends React.Component {
   }
 
   componentDidMount() {
-    getAllAuthors().then(authors => {
-     this.setState({authors});
-    })
+    const courseId = this.props.match.params.id;
+    if (courseId) {
+      const course = courseStore.getCourseById(courseId);
+      course ? this.setState({course}) : this.setState({redirectTo404Page: true});
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.course.id !== nextProps.course.id) {
+    if (nextProps.course && this.props.course.id !== nextProps.course.id) {
       // Necessary to populate form when existing course is loaded directly.
       this.setState({ course: Object.assign({}, nextProps.course) });
     }
@@ -71,19 +74,19 @@ class ManageCoursePage extends React.Component {
     }
 
     updateCourse(this.state.course);
-    this.redirect();
+    this.redirectToCoursePage();
   }
 
-  redirect() {
+  redirectToCoursePage() {
     this.setState({ saving: false, redirectToCoursePage: true });
     toastr.success('Course saved');
   }
 
   render() {
     if (this.state.redirectToCoursePage) return <Redirect to={{ pathname: '/courses' }} />
+    if (this.state.redirectTo404Page) return <Redirect to={{ pathName: '/404'}} />
     return (
       <div>
-        {this.state.course.title}
         <CourseForm
           authors={this.state.authors}
           onChange={this.updateCourseState}
@@ -99,6 +102,7 @@ class ManageCoursePage extends React.Component {
 
 ManageCoursePage.propTypes = {
   course: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default ManageCoursePage;
