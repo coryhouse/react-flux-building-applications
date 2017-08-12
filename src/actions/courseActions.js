@@ -12,29 +12,30 @@ export function loadCourses() {
 }
 
 export function createCourse(course) {
-    var newCourse = courseApi.saveCourse(course);
-
-    //Hey dispatcher, go tell all the stores that an author was just created.
-    Dispatcher.dispatch({
-        actionType: actionTypes.CREATE_COURSE,
-        course: newCourse
+    courseApi.saveCourse(course).then(newCourse => {
+        //Hey dispatcher, go tell all the stores that an author was just created.
+        Dispatcher.dispatch({
+            actionType: actionTypes.CREATE_COURSE,
+            course: newCourse
+        });
     });
 }
 
 export function updateCourse(course) {
-    var updatedCourse = courseApi.saveCourse(course);
-
-    Dispatcher.dispatch({
-        actionType: actionTypes.UPDATE_COURSE,
-        course: updatedCourse
+    courseApi.saveCourse(course).then(updatedCourse => {
+        Dispatcher.dispatch({
+            actionType: actionTypes.UPDATE_COURSE,
+            course: updatedCourse
+        });
     });
 }
 
 export function deleteCourse(id) {
-    courseApi.deleteCourse(id);
-
-    Dispatcher.dispatch({
-        actionType: actionTypes.DELETE_COURSE,
-        id: id
+    courseApi.deleteCourse(id).then( () => {
+        Dispatcher.dispatch({
+            actionType: actionTypes.DELETE_COURSE,
+            id: id
+        });
     });
+
 }
