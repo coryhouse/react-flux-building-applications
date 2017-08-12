@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Prompt } from 'react-router-dom';
 import CourseForm from './CourseForm';
 import courseStore from '../../stores/courseStore';
 import authorStore from '../../stores/authorStore';
@@ -20,6 +20,7 @@ class ManageCoursePage extends React.Component {
         length: '',
         category: ''
       },
+      isDirty: false,
       authors: authorStore.getAllAuthors(),
       errors: {},
       saving: false,
@@ -49,7 +50,7 @@ class ManageCoursePage extends React.Component {
   updateCourseState({ target }) {
     this.setState(prevState => {
       const course = { ...prevState.course, [target.name]: target.value };
-      return { course };
+      return { course, isDirty: true };
     });
   }
 
@@ -78,22 +79,30 @@ class ManageCoursePage extends React.Component {
   }
 
   redirectToCoursePage() {
-    this.setState({ saving: false, redirectToCoursePage: true });
+    this.setState({ saving: false, isDirty: false, redirectToCoursePage: true });
     toastr.success('Course saved');
   }
 
   render() {
-    if (this.state.redirectToCoursePage) return <Redirect to={{ pathname: '/courses' }} />
-    if (this.state.redirectTo404Page) return <Redirect to={{ pathName: '/404'}} />
+    const {redirectTo404Page, redirectToCoursePage, authors, course, errors, saving, isDirty} = this.state;
+    if (redirectToCoursePage) return <Redirect to={{ pathname: '/courses' }} />
+    if (redirectTo404Page) return <Redirect to={{ pathName: '/404'}} />
+    
     return (
       <div>
+        <Prompt
+          when={isDirty}
+          message={location => (
+            `Abandon your changes?`
+          )}
+        />
         <CourseForm
-          authors={this.state.authors}
+          authors={authors}
           onChange={this.updateCourseState}
           onSave={this.saveCourse}
-          course={this.state.course}
-          errors={this.state.errors}
-          saving={this.state.saving}
+          course={course}
+          errors={errors}
+          saving={saving}
         />
       </div>
     );
