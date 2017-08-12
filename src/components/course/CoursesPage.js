@@ -1,25 +1,27 @@
 import React from 'react';
 import CourseList from './CourseList';
-import {getAllCourses} from '../../api/courseApi';
+import courseStore from '../../stores/courseStore';
 import {Link} from 'react-router-dom';
 
 class CoursesPage extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        courses: []
+        courses: courseStore.getAllCourses()
       }
   }
-
-  componentDidMount() {
-    getAllCourses().then( courses => {
-        this.setState({ courses });
-    });
-  }
-
-  redirectToAddCoursePage = () => {
-    // browserHistory.push('/course');
-  }
+ 
+ 	componentWillMount() {
+ 		courseStore.addChangeListener(this.onChange);
+ 	}
+ 
+ 	componentWillUnmount() {
+ 		courseStore.removeChangeListener(this.onChange);
+   }
+  
+  onChange = () => {
+ 		this.setState({ courses: courseStore.getAllCourses() });
+ 	}
 
   render() {
     return (
