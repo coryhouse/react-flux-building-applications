@@ -1,12 +1,12 @@
 import Dispatcher from '../dispatcher/appDispatcher';
-import ActionTypes from '../constants/actionTypes';
+import actionTypes from '../constants/actionTypes';
 import {EventEmitter} from 'events';
 import _ from 'lodash';
 const CHANGE_EVENT = 'change';
 
-const _authors = [];
+let _authors = [];
 
-const AuthorStore = Object.assign({}, EventEmitter.prototype, {
+const authorStore = Object.assign({}, EventEmitter.prototype, {
 	addChangeListener: function(callback) {
 		this.on(CHANGE_EVENT, callback);
 	},
@@ -30,29 +30,29 @@ const AuthorStore = Object.assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action) {
 	switch(action.actionType) {
-		case ActionTypes.LOAD_AUTHORS:
+		case actionTypes.LOAD_AUTHORS:
 			_authors = action.authors;
-			AuthorStore.emitChange();
+			authorStore.emitChange();
 			break;
-		case ActionTypes.CREATE_AUTHOR:
+		case actionTypes.CREATE_AUTHOR:
 			_authors.push(action.author);
-			AuthorStore.emitChange();
+			authorStore.emitChange();
 			break;
-		case ActionTypes.UPDATE_AUTHOR:
+		case actionTypes.UPDATE_AUTHOR:
 			var existingAuthor = _.find(_authors, {id: action.author.id});
 			var existingAuthorIndex = _.indexOf(_authors, existingAuthor); 
 			_authors.splice(existingAuthorIndex, 1, action.author);
-			AuthorStore.emitChange();
+			authorStore.emitChange();
 			break;	
-		case ActionTypes.DELETE_AUTHOR:
+		case actionTypes.DELETE_AUTHOR:
 			_.remove(_authors, function(author) {
 				return action.id === author.id;
 			});
-			AuthorStore.emitChange();
+			authorStore.emitChange();
 			break;
 		default:
 			// no op
 	}
 });
 
-export default AuthorStore;
+export default authorStore;

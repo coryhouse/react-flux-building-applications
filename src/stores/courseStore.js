@@ -1,5 +1,5 @@
 import Dispatcher from '../dispatcher/appDispatcher';
-import ActionTypes from '../constants/actionTypes';
+import actionTypes from '../constants/actionTypes';
 import { EventEmitter } from 'events';
 import _ from 'lodash';
 const CHANGE_EVENT = 'change';
@@ -30,21 +30,21 @@ const courseStore = Object.assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function (action) {
 	switch (action.actionType) {
-		case ActionTypes.LOAD_COURSES:
+		case actionTypes.LOAD_COURSES:
 			_courses = action.courses;
 			courseStore.emitChange();
 			break;
-		case ActionTypes.CREATE_COURSE:
+		case actionTypes.CREATE_COURSE:
 			_courses.push(action.course);
 			courseStore.emitChange();
 			break;
-		case ActionTypes.UPDATE_COURSE:
+		case actionTypes.UPDATE_COURSE:
 			const existingCourse = _.find(_courses, { id: action.course.id });
 			const existingCourseIndex = _.indexOf(_courses, existingCourse);
 			_courses.splice(existingCourseIndex, 1, action.course);
 			courseStore.emitChange();
 			break;
-		case ActionTypes.DELETE_COURSE:
+		case actionTypes.DELETE_COURSE:
 			_.remove(_courses, function (course) {
 				return action.id === course.id;
 			});
