@@ -5,7 +5,6 @@ import CourseForm from './CourseForm';
 import courseStore from '../../stores/courseStore';
 import authorStore from '../../stores/authorStore';
 import {updateCourse} from '../../actions/courseActions';
-import toastr from 'toastr';
 
 class ManageCoursePage extends React.Component {
   constructor(props) {
@@ -80,7 +79,7 @@ class ManageCoursePage extends React.Component {
 
   redirectToCoursePage() {
     this.setState({ saving: false, isDirty: false, redirectToCoursePage: true });
-    toastr.success('Course saved');
+    alert('Course saved');
   }
 
   render() {
