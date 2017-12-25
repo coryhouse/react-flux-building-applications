@@ -1,10 +1,10 @@
 "use strict";
 
 var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+var createReactClass = require('create-react-class');
+var Link = require('react-router-dom').NavLink;
 
-var Home = React.createClass({
+var Home = createReactClass({
 	render: function() {
 		return (
 			<div className="jumbotron">

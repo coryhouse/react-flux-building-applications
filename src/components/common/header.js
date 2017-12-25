@@ -1,9 +1,10 @@
 "use strict";
 
 var React = require('react');
-var Link = require('react-router').Link;
+var createReactClass = require('create-react-class');
+var Link = require('react-router-dom').NavLink;
 
-var Header = React.createClass({
+var Header = createReactClass({
 	render: function() {
 		return (
         <nav className="navbar navbar-default">
@@ -13,8 +14,8 @@ var Header = React.createClass({
               </Link>
               <ul className="nav navbar-nav">
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="authors">Authors</Link></li>
-                <li><Link to="about">About</Link></li>
+                <li><Link to="/authors">Authors</Link></li>
+                <li><Link to="/about">About</Link></li>
               </ul>
           </div>
         </nav>
