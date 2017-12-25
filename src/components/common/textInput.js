@@ -1,15 +1,17 @@
 "use strict";
 
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 
-var Input = React.createClass({
+var Input = createReactClass({
   propTypes: {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    value: React.PropTypes.string,
-    error: React.PropTypes.string
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string,
+    value: PropTypes.string,
+    error: PropTypes.string
   },
 
   render: function () {
