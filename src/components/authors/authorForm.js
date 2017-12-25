@@ -1,14 +1,16 @@
 "use strict";
 
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var Input = require('../common/textInput');
 
-var AuthorForm = React.createClass({
+var AuthorForm = createReactClass({
 	propTypes: {
-		author:	React.PropTypes.object.isRequired,
-		onSave:	React.PropTypes.func.isRequired,
-		onChange: React.PropTypes.func.isRequired,
-		errors: React.PropTypes.object
+		author:	PropTypes.object.isRequired,
+		onSave:	PropTypes.func.isRequired,
+		onChange: PropTypes.func.isRequired,
+		errors: PropTypes.object
 	},
 
 	render: function() {
