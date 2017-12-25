@@ -1,13 +1,14 @@
 "use strict";
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Router = require('react-router');
-var Link = require('react-router').Link;
+var Link = require('react-router-dom').Link;
 var AuthorStore = require('../../stores/authorStore');
 var AuthorActions = require('../../actions/authorActions');
 var AuthorList = require('./authorList');
 
-var AuthorPage = React.createClass({
+var AuthorPage = createReactClass({
 	getInitialState: function() {
 		return {
 			authors: AuthorStore.getAllAuthors()
