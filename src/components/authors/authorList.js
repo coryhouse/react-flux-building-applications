@@ -1,13 +1,15 @@
 "use strict";
 
 var React = require('react');
-var Link = require('react-router').Link;
+var PropTypes = require('prop-types')
+var createReactClass = require('create-react-class');
+var Link = require('react-router-dom').NavLink;
 var AuthorActions = require('../../actions/authorActions');
 var toastr = require('toastr');
 
-var AuthorList = React.createClass({
+var AuthorList = createReactClass({
 	propTypes: {
-		authors: React.PropTypes.array.isRequired
+		authors: PropTypes.array.isRequired
 	},
 
 	deleteAuthor: function(id, event) {
