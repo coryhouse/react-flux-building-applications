@@ -3,7 +3,6 @@
 var React = require('react');
 var createReactClass = require('create-react-class');
 var ReactRouter = require('react-router-dom');
-var browserHistory = ReactRouter.browserHistory;
 var AuthorForm = require('./authorForm');
 var AuthorActions = require('../../actions/authorActions');
 var AuthorStore = require('../../stores/authorStore');
