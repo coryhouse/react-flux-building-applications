@@ -3,7 +3,7 @@
 var React = require('react');
 var PropTypes = require('prop-types')
 var createReactClass = require('create-react-class');
-var Link = require('react-router-dom').NavLink;
+var Link = require('react-router-dom').Link;
 var AuthorActions = require('../../actions/authorActions');
 var toastr = require('toastr');
 

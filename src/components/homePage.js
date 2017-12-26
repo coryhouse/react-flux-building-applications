@@ -2,7 +2,7 @@
 
 var React = require('react');
 var createReactClass = require('create-react-class');
-var Link = require('react-router-dom').NavLink;
+var Link = require('react-router-dom').Link;
 
 var Home = createReactClass({
 	render: function() {
