@@ -5,12 +5,11 @@ var ReactDom = require('react-dom');
 var ReactRouter = require('react-router-dom');
 var App = require('./components/app');
 
+var Router = ReactRouter.BrowserRouter;
+var Route = ReactRouter.Route;
 var InitializeActions = require('./actions/initializeActions');
 
 InitializeActions.initApp();
-
-var Router = ReactRouter.BrowserRouter;
-var Route = ReactRouter.Route;
 
 ReactDom.render(
     <Router>
