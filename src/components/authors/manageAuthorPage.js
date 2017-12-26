@@ -12,13 +12,6 @@ var Redirect = ReactRouter.Redirect;
 var Prompt = ReactRouter.Prompt;
 
 var ManageAuthorPage = createReactClass({
-	componentDidMount: function() {
-		var authorId = this.props.match.params.id; //from the path '/author:id'
-		if (authorId) {
-			this.setState({author: AuthorStore.getAuthorById(authorId) });
-		}
-	},
-
 	getInitialState: function() {
 		return {
 			author: { id: '', firstName: '', lastName: '' },
@@ -26,6 +19,13 @@ var ManageAuthorPage = createReactClass({
 			dirty: false,
 			redirect: false
 		};
+	},
+
+	componentDidMount: function() {
+		var authorId = this.props.match.params.id; //from the path '/author:id'
+		if (authorId) {
+			this.setState({author: AuthorStore.getAuthorById(authorId) });
+		}
 	},
 
 	setAuthorState: function(event) {
