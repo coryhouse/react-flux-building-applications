@@ -21,15 +21,6 @@ var ManageAuthorPage = createReactClass({
 		}
 	},
 
-	routerWillLeave: function(nextLocation) {
-		// Return false to prevent a transition w/o prompting the user,
-		// or return a string to allow the user to decide:
-		if (this.state.dirty) {
-			return 'Leave without saving?';
-		}
-		return true;
-	},
-
 	getInitialState: function() {
 		return {
 			author: { id: '', firstName: '', lastName: '' },
@@ -99,4 +90,4 @@ var ManageAuthorPage = createReactClass({
 
 // Using withRouter higher order component to wrap ManageAuthorPage
 // to notify the user when attempting to navigate away when the form is dirty.
-module.exports = withRouter(ManageAuthorPage);
+module.exports = ManageAuthorPage;
