@@ -29,7 +29,6 @@ var ManageAuthorPage = createReactClass({
 	},
 
 	setAuthorState: function(event) {
-		// copy state since it's immutable
 		var author = Object.assign({}, this.state.author);
 		author[event.target.name] = event.target.value;
 		this.setState({author: author, dirty: true});
