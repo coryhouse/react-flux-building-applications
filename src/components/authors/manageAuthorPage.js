@@ -65,9 +65,8 @@ var ManageAuthorPage = createReactClass({
 			AuthorActions.createAuthor(this.state.author);
 		}
 		
-		this.setState({dirty: false, redirect: true}, function() {
-			toastr.success('Author saved.');
-		});
+		this.setState({dirty: false, redirect: true});
+		toastr.success('Author saved.');
 	},
 
 	render: function() {
