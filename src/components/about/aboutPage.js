@@ -3,6 +3,7 @@
 var React = require('react');
 var createReactClass = require('create-react-class');
 var Prompt = require('react-router-dom').Prompt;
+var withRouter = require('react-router').withRouter;
 
 var About = createReactClass({
 	render: function () {
