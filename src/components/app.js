@@ -10,7 +10,6 @@ var AuthorPage = require('./authors/authorPage');
 var ManageAuthorPage = require('./authors/manageAuthorPage');
 var AboutPage = require('./about/aboutPage');
 var NotFoundPage = require('./notFoundPage');
-var Header = require('./common/header');
 
 var Route = ReactRouter.Route;
 var Switch = ReactRouter.Switch;
