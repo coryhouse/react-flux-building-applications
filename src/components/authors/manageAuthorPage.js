@@ -6,7 +6,6 @@ var ReactRouter = require('react-router-dom');
 var AuthorForm = require('./authorForm');
 var AuthorActions = require('../../actions/authorActions');
 var AuthorStore = require('../../stores/authorStore');
-var toastr = require('toastr');
 
 var Redirect = ReactRouter.Redirect;
 var Prompt = ReactRouter.Prompt;
@@ -66,7 +65,7 @@ var ManageAuthorPage = createReactClass({
 		}
 		
 		this.setState({dirty: false, redirect: true});
-		toastr.success('Author saved.');
+		// TODO: display author saved
 	},
 
 	render: function() {
@@ -84,6 +83,4 @@ var ManageAuthorPage = createReactClass({
 	}
 });
 
-// Using withRouter higher order component to wrap ManageAuthorPage
-// to notify the user when attempting to navigate away when the form is dirty.
 module.exports = ManageAuthorPage;

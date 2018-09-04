@@ -5,7 +5,6 @@ var PropTypes = require('prop-types')
 var createReactClass = require('create-react-class');
 var Link = require('react-router-dom').Link;
 var AuthorActions = require('../../actions/authorActions');
-var toastr = require('toastr');
 
 var AuthorList = createReactClass({
 	propTypes: {
@@ -15,7 +14,7 @@ var AuthorList = createReactClass({
 	deleteAuthor: function(id, event) {
 		event.preventDefault();
 		AuthorActions.deleteAuthor(id);
-		toastr.success('Author Deleted');
+		// TODO: display delete confirmation
 	},
 
 	render: function() {
