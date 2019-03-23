@@ -24,7 +24,7 @@ const courseStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   getCourseById: function(id) {
-    return _.find(_courses, { id: id });
+    return _courses.find(c => c.id === parseInt(id, 10));
   }
 });
 
