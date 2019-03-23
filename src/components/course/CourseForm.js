@@ -4,7 +4,6 @@ import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
 function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
-  debugger;
   return (
     <form>
       <h1>Manage Course</h1>
