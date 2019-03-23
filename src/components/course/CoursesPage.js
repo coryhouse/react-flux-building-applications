@@ -32,7 +32,10 @@ class CoursesPage extends React.Component {
     return (
       <div>
         <h1>Courses</h1>
-        <Link to="/course">Add Course</Link>
+
+        <Link className="btn btn-primary add-course" to="/course">
+          Add Course
+        </Link>
         <CourseList
           courses={this.state.courses}
           deleteCourse={this.onDeleteCourseClick}
