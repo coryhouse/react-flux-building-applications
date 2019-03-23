@@ -39,10 +39,11 @@ Dispatcher.register(function(action) {
       break;
     case actionTypes.UPDATE_COURSE:
       // Update the relevant course
-      _courses = _courses.forEach(course => {
+      _courses = _courses.map(course => {
         if (course.id === action.course.id) {
-          course = action.course;
+          return action.course;
         }
+        return course;
       });
       courseStore.emitChange();
       break;
