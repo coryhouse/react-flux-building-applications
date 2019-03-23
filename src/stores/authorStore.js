@@ -1,7 +1,6 @@
 import Dispatcher from "../dispatcher/appDispatcher";
 import actionTypes from "../constants/actionTypes";
 import { EventEmitter } from "events";
-import _ from "lodash";
 const CHANGE_EVENT = "change";
 
 let _authors = [];
@@ -21,10 +20,6 @@ const authorStore = Object.assign({}, EventEmitter.prototype, {
 
   getAllAuthors: function() {
     return _authors;
-  },
-
-  getAuthorById: function(id) {
-    return _.find(_authors, { id: id });
   }
 });
 

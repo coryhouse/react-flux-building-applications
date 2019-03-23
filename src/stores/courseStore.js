@@ -1,7 +1,6 @@
 import Dispatcher from "../dispatcher/appDispatcher";
 import actionTypes from "../constants/actionTypes";
 import { EventEmitter } from "events";
-import _ from "lodash";
 const CHANGE_EVENT = "change";
 
 let _courses = [];
@@ -39,15 +38,16 @@ Dispatcher.register(function(action) {
       courseStore.emitChange();
       break;
     case actionTypes.UPDATE_COURSE:
-      const existingCourse = _.find(_courses, { id: action.course.id });
-      const existingCourseIndex = _.indexOf(_courses, existingCourse);
-      _courses.splice(existingCourseIndex, 1, action.course);
+      // Update the relevant course
+      _courses = _courses.forEach(course => {
+        if (course.id === action.course.id) {
+          course = action.course;
+        }
+      });
       courseStore.emitChange();
       break;
     case actionTypes.DELETE_COURSE:
-      _.remove(_courses, function(course) {
-        return action.id === course.id;
-      });
+      _courses = _courses.filter(c => c.id !== parseInt(action.id, 10));
       courseStore.emitChange();
       break;
     default:
