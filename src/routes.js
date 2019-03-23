@@ -1,7 +1,7 @@
 import React from 'react';
 import {DefaultRoute, Route, NotFoundRoute, Redirect} from Router;
 
-var routes = (
+const routes = (
   <Route name="app" path="/" handler={require('./components/app')}>
     <DefaultRoute handler={require('./components/homePage')} />
     <Route name="authors" handler={require('./components/authors/authorPage')} />

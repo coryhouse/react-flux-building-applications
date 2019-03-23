@@ -17,7 +17,7 @@ class ManageAuthorPage extends React.Component {
   }
 
   componentDidMount() {
-    var authorId = this.props.params.id; //from the path '/author:id'
+    const authorId = this.props.params.id; //from the path '/author:id'
     if (authorId) {
       this.setState({ author: AuthorStore.getAuthorById(authorId) });
     }
@@ -31,7 +31,7 @@ class ManageAuthorPage extends React.Component {
   }
 
   authorFormIsValid = () => {
-    var formIsValid = true;
+    const formIsValid = true;
     const errors = {};
     const { author } = this.state;
 

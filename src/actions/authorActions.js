@@ -12,7 +12,7 @@ export function loadAuthors() {
 }
 
 export function createAuthor(author) {
-  var newAuthor = authorApi.saveAuthor(author);
+  const newAuthor = authorApi.saveAuthor(author);
 
   //Hey dispatcher, go tell all the stores that an author was just created.
   Dispatcher.dispatch({
@@ -22,7 +22,7 @@ export function createAuthor(author) {
 }
 
 export function updateAuthor(author) {
-  var updatedAuthor = authorApi.saveAuthor(author);
+  const updatedAuthor = authorApi.saveAuthor(author);
 
   Dispatcher.dispatch({
     actionType: actionTypes.UPDATE_AUTHOR,
