@@ -4,6 +4,7 @@ import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
 function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
+  debugger;
   return (
     <form>
       <h1>Manage Course</h1>
@@ -23,7 +24,7 @@ function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
         options={authors.map(author => {
           return {
             value: author.id,
-            text: author.firstName + " " + author.lastName
+            text: author.name
           };
         })}
         onChange={onChange}
