@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Redirect, Prompt } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import courseStore from "../../stores/courseStore";
 import authorStore from "../../stores/authorStore";
@@ -118,7 +118,6 @@ class ManageCoursePage extends React.Component {
 
     return (
       <div>
-        <Prompt when={isDirty} message={location => `Abandon your changes?`} />
         <CourseForm
           authors={authors}
           onChange={this.updateCourseState}
