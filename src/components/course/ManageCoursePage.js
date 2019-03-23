@@ -19,7 +19,6 @@ class ManageCoursePage extends React.Component {
         length: "",
         category: ""
       },
-      isDirty: false,
       authors: authorStore.getAuthors(),
       errors: {},
       saving: false,
@@ -63,10 +62,10 @@ class ManageCoursePage extends React.Component {
     }
   }
 
-  updateCourseState({ target }) {
+  handleChange({ target }) {
     this.setState(prevState => {
       const course = { ...prevState.course, [target.name]: target.value };
-      return { course, isDirty: true };
+      return { course };
     });
   }
 
@@ -97,7 +96,6 @@ class ManageCoursePage extends React.Component {
   redirectToCoursePage() {
     this.setState({
       saving: false,
-      isDirty: false,
       redirectToCoursePage: true
     });
     alert("Course saved");
@@ -110,8 +108,7 @@ class ManageCoursePage extends React.Component {
       authors,
       course,
       errors,
-      saving,
-      isDirty
+      saving
     } = this.state;
     if (redirectToCoursePage) return <Redirect to={{ pathname: "/courses" }} />;
     if (redirectTo404Page) return <Redirect to={{ pathName: "/404" }} />;
@@ -120,7 +117,7 @@ class ManageCoursePage extends React.Component {
       <div>
         <CourseForm
           authors={authors}
-          onChange={this.updateCourseState}
+          onChange={this.handleChange}
           onSubmit={this.saveCourse}
           course={course}
           errors={errors}
