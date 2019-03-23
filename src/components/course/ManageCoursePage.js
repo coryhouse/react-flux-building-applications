@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Redirect, Prompt } from 'react-router-dom';
-import CourseForm from './CourseForm';
-import courseStore from '../../stores/courseStore';
-import authorStore from '../../stores/authorStore';
-import {updateCourse} from '../../actions/courseActions';
+import React from "react";
+import PropTypes from "prop-types";
+import { Redirect, Prompt } from "react-router-dom";
+import CourseForm from "./CourseForm";
+import courseStore from "../../stores/courseStore";
+import authorStore from "../../stores/authorStore";
+import { updateCourse } from "../../actions/courseActions";
 
 class ManageCoursePage extends React.Component {
   constructor(props) {
@@ -12,12 +12,12 @@ class ManageCoursePage extends React.Component {
 
     this.state = {
       course: {
-        id: '',
-        title: '',
-        watchHref: '',
-        authorId: '',
-        length: '',
-        category: ''
+        id: "",
+        title: "",
+        watchHref: "",
+        authorId: "",
+        length: "",
+        category: ""
       },
       isDirty: false,
       authors: authorStore.getAllAuthors(),
@@ -35,7 +35,9 @@ class ManageCoursePage extends React.Component {
     const courseId = this.props.match.params.id;
     if (courseId) {
       const course = courseStore.getCourseById(courseId);
-      course ? this.setState({course}) : this.setState({redirectTo404Page: true});
+      course
+        ? this.setState({ course })
+        : this.setState({ redirectTo404Page: true });
     }
   }
 
@@ -58,7 +60,7 @@ class ManageCoursePage extends React.Component {
     let errors = {};
 
     if (this.state.course.title.length < 5) {
-      errors.title = 'Title must be at least 5 characters.';
+      errors.title = "Title must be at least 5 characters.";
       formIsValid = false;
     }
 
@@ -78,23 +80,30 @@ class ManageCoursePage extends React.Component {
   }
 
   redirectToCoursePage() {
-    this.setState({ saving: false, isDirty: false, redirectToCoursePage: true });
-    alert('Course saved');
+    this.setState({
+      saving: false,
+      isDirty: false,
+      redirectToCoursePage: true
+    });
+    alert("Course saved");
   }
 
   render() {
-    const {redirectTo404Page, redirectToCoursePage, authors, course, errors, saving, isDirty} = this.state;
-    if (redirectToCoursePage) return <Redirect to={{ pathname: '/courses' }} />
-    if (redirectTo404Page) return <Redirect to={{ pathName: '/404'}} />
-    
+    const {
+      redirectTo404Page,
+      redirectToCoursePage,
+      authors,
+      course,
+      errors,
+      saving,
+      isDirty
+    } = this.state;
+    if (redirectToCoursePage) return <Redirect to={{ pathname: "/courses" }} />;
+    if (redirectTo404Page) return <Redirect to={{ pathName: "/404" }} />;
+
     return (
       <div>
-        <Prompt
-          when={isDirty}
-          message={location => (
-            `Abandon your changes?`
-          )}
-        />
+        <Prompt when={isDirty} message={location => `Abandon your changes?`} />
         <CourseForm
           authors={authors}
           onChange={this.updateCourseState}

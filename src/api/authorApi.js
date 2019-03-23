@@ -1,29 +1,29 @@
-import delay from './delay';
+import delay from "./delay";
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
 // All calls return promises.
 const authors = [
   {
-    id: 'cory-house',
-    firstName: 'Cory',
-    lastName: 'House'
+    id: "cory-house",
+    firstName: "Cory",
+    lastName: "House"
   },
   {
-    id: 'scott-allen',
-    firstName: 'Scott',
-    lastName: 'Allen'
+    id: "scott-allen",
+    firstName: "Scott",
+    lastName: "Allen"
   },
   {
-    id: 'dan-wahlin',
-    firstName: 'Dan',
-    lastName: 'Wahlin'
+    id: "dan-wahlin",
+    firstName: "Dan",
+    lastName: "Wahlin"
   }
 ];
 
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (author) => {
-  return author.firstName.toLowerCase() + '-' + author.lastName.toLowerCase();
+const generateId = author => {
+  return author.firstName.toLowerCase() + "-" + author.lastName.toLowerCase();
 };
 
 export function getAllAuthors() {
@@ -40,7 +40,9 @@ export function saveAuthor(author) {
       // Simulate server-side validation
       const minAuthorNameLength = 3;
       if (author.firstName.length < minAuthorNameLength) {
-        reject(`First Name must be at least ${minAuthorNameLength} characters.`);
+        reject(
+          `First Name must be at least ${minAuthorNameLength} characters.`
+        );
       }
 
       if (author.lastName.length < minAuthorNameLength) {

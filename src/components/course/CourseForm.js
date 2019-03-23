@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
+import React from "react";
+import PropTypes from "prop-types";
+import TextInput from "../common/TextInput";
+import SelectInput from "../common/SelectInput";
 
-function CourseForm({course, authors, onSave, onChange, saving, errors}) {
+function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
   return (
     <form>
       <h1>Manage Course</h1>
@@ -12,45 +12,50 @@ function CourseForm({course, authors, onSave, onChange, saving, errors}) {
         label="Title"
         value={course.title}
         onChange={onChange}
-        error={errors.title}/>
+        error={errors.title}
+      />
 
       <SelectInput
         name="authorId"
         label="Author"
         value={course.authorId}
         defaultOption="Select Author"
-        options={authors.map( author => {
+        options={authors.map(author => {
           return {
-            value: author.id, 
-            text: author.firstName + ' ' + author.lastName
+            value: author.id,
+            text: author.firstName + " " + author.lastName
           };
         })}
-        onChange={onChange} 
-        error={errors.authorId}/>
+        onChange={onChange}
+        error={errors.authorId}
+      />
 
       <TextInput
         name="category"
         label="Category"
         value={course.category}
         onChange={onChange}
-        error={errors.category}/>
+        error={errors.category}
+      />
 
       <TextInput
         name="length"
         label="Length"
         value={course.length}
         onChange={onChange}
-        error={errors.length}/>
+        error={errors.length}
+      />
 
       <input
         type="submit"
         disabled={saving}
-        value={saving ? 'Saving...' : 'Save'}
+        value={saving ? "Saving..." : "Save"}
         className="btn btn-primary"
-        onClick={onSave}/>
+        onClick={onSave}
+      />
     </form>
   );
-};
+}
 
 CourseForm.propTypes = {
   course: PropTypes.object.isRequired,

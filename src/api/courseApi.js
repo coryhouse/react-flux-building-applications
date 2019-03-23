@@ -1,4 +1,4 @@
-import delay from './delay';
+import delay from "./delay";
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -7,7 +7,8 @@ const courses = [
   {
     id: "react-flux-building-applications",
     title: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
+    watchHref:
+      "http://www.pluralsight.com/courses/react-flux-building-applications",
     authorId: "cory-house",
     length: "5:08",
     category: "JavaScript"
@@ -23,7 +24,8 @@ const courses = [
   {
     id: "architecture",
     title: "Architecting Applications for the Real World",
-    watchHref: "http://www.pluralsight.com/courses/architecting-applications-dotnet",
+    watchHref:
+      "http://www.pluralsight.com/courses/architecting-applications-dotnet",
     authorId: "cory-house",
     length: "2:52",
     category: "Software Architecture"
@@ -31,7 +33,8 @@ const courses = [
   {
     id: "career-reboot-for-developer-mind",
     title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    watchHref: "http://www.pluralsight.com/courses/career-reboot-for-developer-mind",
+    watchHref:
+      "http://www.pluralsight.com/courses/career-reboot-for-developer-mind",
     authorId: "cory-house",
     length: "2:30",
     category: "Career"
@@ -47,12 +50,12 @@ const courses = [
 ];
 
 function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(find, 'g'), replace);
+  return str.replace(new RegExp(find, "g"), replace);
 }
 
 //This would be performed on the server in a real app. Just stubbing in.
-const generateId = (course) => {
-  return replaceAll(course.title, ' ', '-');
+const generateId = course => {
+  return replaceAll(course.title, " ", "-");
 };
 
 export function getAllCourses() {
