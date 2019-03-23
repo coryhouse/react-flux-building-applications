@@ -122,7 +122,7 @@ class ManageCoursePage extends React.Component {
         <CourseForm
           authors={authors}
           onChange={this.updateCourseState}
-          onSave={this.saveCourse}
+          onSubmit={this.saveCourse}
           course={course}
           errors={errors}
           saving={saving}
