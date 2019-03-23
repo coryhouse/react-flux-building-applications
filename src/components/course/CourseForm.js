@@ -38,14 +38,6 @@ function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
         error={errors.category}
       />
 
-      <TextInput
-        name="length"
-        label="Length"
-        value={course.length}
-        onChange={onChange}
-        error={errors.length}
-      />
-
       <input
         type="submit"
         disabled={saving}
