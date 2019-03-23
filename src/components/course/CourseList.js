@@ -12,7 +12,6 @@ function CourseList({ courses, deleteCourse }) {
           <th>Title</th>
           <th>Author</th>
           <th>Category</th>
-          <th>Length</th>
         </tr>
       </thead>
       <tbody>
@@ -32,7 +31,6 @@ function CourseList({ courses, deleteCourse }) {
               </td>
               <td>{course.authorId}</td>
               <td>{course.category}</td>
-              <td>{course.length}</td>
             </tr>
           );
         })}
