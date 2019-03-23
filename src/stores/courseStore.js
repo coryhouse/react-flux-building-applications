@@ -18,7 +18,7 @@ const courseStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(CHANGE_EVENT);
   },
 
-  getAllCourses: function() {
+  getCourses: function() {
     return _courses;
   },
 

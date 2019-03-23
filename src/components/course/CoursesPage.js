@@ -8,7 +8,7 @@ class CoursesPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      courses: courseStore.getAllCourses()
+      courses: courseStore.getCourses()
     };
   }
 
@@ -21,7 +21,7 @@ class CoursesPage extends React.Component {
   }
 
   onChange = () => {
-    this.setState({ courses: courseStore.getAllCourses() });
+    this.setState({ courses: courseStore.getCourses() });
   };
 
   onDeleteCourseClick = event => {

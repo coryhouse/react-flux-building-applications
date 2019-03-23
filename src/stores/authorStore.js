@@ -18,7 +18,7 @@ const authorStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(CHANGE_EVENT);
   },
 
-  getAllAuthors: function() {
+  getAuthors: function() {
     return _authors;
   }
 });
