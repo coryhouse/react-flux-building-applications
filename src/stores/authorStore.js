@@ -34,22 +34,6 @@ Dispatcher.register(function(action) {
       _authors = action.authors;
       authorStore.emitChange();
       break;
-    case actionTypes.CREATE_AUTHOR:
-      _authors.push(action.author);
-      authorStore.emitChange();
-      break;
-    case actionTypes.UPDATE_AUTHOR:
-      const existingAuthor = _.find(_authors, { id: action.author.id });
-      const existingAuthorIndex = _.indexOf(_authors, existingAuthor);
-      _authors.splice(existingAuthorIndex, 1, action.author);
-      authorStore.emitChange();
-      break;
-    case actionTypes.DELETE_AUTHOR:
-      _.remove(_authors, function(author) {
-        return action.id === author.id;
-      });
-      authorStore.emitChange();
-      break;
     default:
     // no op
   }
