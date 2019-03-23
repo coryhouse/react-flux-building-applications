@@ -3,8 +3,8 @@ import React from "react";
 function About() {
   return (
     <div>
-      <h1>About</h1>
-      This application uses React.
+      <h2>About</h2>
+      This app uses React.
     </div>
   );
 }

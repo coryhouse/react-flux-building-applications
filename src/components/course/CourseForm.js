@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
-function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
+function CourseForm({ course, authors, onSubmit, onChange, saving, errors }) {
   return (
-    <form>
-      <h1>Manage Course</h1>
+    <form onSubmit={onSubmit}>
+      <h2>Manage Course</h2>
       <TextInput
         name="title"
         label="Title"
@@ -43,7 +43,6 @@ function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
         disabled={saving}
         value={saving ? "Saving..." : "Save"}
         className="btn btn-primary"
-        onClick={onSave}
       />
     </form>
   );
@@ -52,7 +51,7 @@ function CourseForm({ course, authors, onSave, onChange, saving, errors }) {
 CourseForm.propTypes = {
   course: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
-  onSave: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
   errors: PropTypes.object

@@ -31,7 +31,7 @@ class CoursesPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Courses</h1>
+        <h2>Courses</h2>
 
         <Link className="btn btn-primary add-course" to="/course">
           Add Course
