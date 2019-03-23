@@ -20,7 +20,7 @@ class ManageCoursePage extends React.Component {
         category: ""
       },
       isDirty: false,
-      authors: authorStore.getAllAuthors(),
+      authors: authorStore.getAuthors(),
       errors: {},
       saving: false,
       redirectToCoursePage: false,
@@ -40,6 +40,21 @@ class ManageCoursePage extends React.Component {
         : this.setState({ redirectTo404Page: true });
     }
   }
+
+  componentWillMount() {
+    courseStore.addChangeListener(this.onChange);
+  }
+
+  componentWillUnmount() {
+    courseStore.removeChangeListener(this.onChange);
+  }
+
+  onChange = () => {
+    this.setState({
+      courses: courseStore.getCourses(),
+      authors: authorStore.getAuthors()
+    });
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.course && this.props.course.id !== nextProps.course.id) {
