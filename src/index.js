@@ -18,7 +18,7 @@ loadCourses();
 
 render(
   <Router>
-    <Route path="/" component={App} />
+    <App />
   </Router>,
   document.getElementById("root")
 );
