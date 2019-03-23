@@ -3,7 +3,7 @@ import * as courseApi from "../api/courseApi";
 import actionTypes from "../constants/actionTypes";
 
 export function loadCourses() {
-  courseApi.getAllCourses().then(courses => {
+  courseApi.getCourses().then(courses => {
     dispatcher.dispatch({
       actionType: actionTypes.LOAD_COURSES,
       courses
