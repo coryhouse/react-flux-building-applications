@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
 
-function CourseForm({ course, authors, onSubmit, onChange, saving, errors }) {
+function CourseForm({ course, authors, onSubmit, onChange, errors }) {
   return (
     <form onSubmit={onSubmit}>
       <h2>Manage Course</h2>
@@ -38,12 +38,7 @@ function CourseForm({ course, authors, onSubmit, onChange, saving, errors }) {
         error={errors.category}
       />
 
-      <input
-        type="submit"
-        disabled={saving}
-        value={saving ? "Saving..." : "Save"}
-        className="btn btn-primary"
-      />
+      <input type="submit" value="Save" className="btn btn-primary" />
     </form>
   );
 }
