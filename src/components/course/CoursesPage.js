@@ -1,7 +1,7 @@
 import React from "react";
 import CourseList from "./CourseList";
 import courseStore from "../../stores/courseStore";
-import { deleteCourse } from "../../actions/courseActions";
+import { deleteCourse, loadCourses } from "../../actions/courseActions";
 import { Link } from "react-router-dom";
 
 class CoursesPage extends React.Component {
@@ -10,6 +10,10 @@ class CoursesPage extends React.Component {
     this.state = {
       courses: courseStore.getCourses()
     };
+  }
+
+  componentDidMount() {
+    if (courseStore.getCourses().length === 0) loadCourses();
   }
 
   componentWillMount() {
