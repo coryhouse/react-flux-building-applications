@@ -8,19 +8,6 @@ import AboutPage from "./about/AboutPage";
 import NotFoundPage from "./NotFoundPage";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "home"
-    };
-  }
-
-  handleChange = value => {
-    this.setState({
-      value: value
-    });
-  };
-
   render() {
     return (
       <div className="container-fluid">
@@ -28,8 +15,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/courses" component={CoursesPage} />
-          <Route path="/course" component={ManageCoursePage} exact />
           <Route path="/course/:id" component={ManageCoursePage} />
+          <Route path="/course" component={ManageCoursePage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/404" component={NotFoundPage} />
           <Route component={NotFoundPage} />
