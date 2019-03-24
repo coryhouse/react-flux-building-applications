@@ -24,10 +24,6 @@ class CoursesPage extends React.Component {
     this.setState({ courses: courseStore.getCourses() });
   };
 
-  onDeleteCourseClick = event => {
-    deleteCourse(event.target.value);
-  };
-
   render() {
     return (
       <div>
@@ -36,10 +32,7 @@ class CoursesPage extends React.Component {
         <Link className="btn btn-primary add-course" to="/course">
           Add Course
         </Link>
-        <CourseList
-          courses={this.state.courses}
-          deleteCourse={this.onDeleteCourseClick}
-        />
+        <CourseList courses={this.state.courses} deleteCourse={deleteCourse} />
       </div>
     );
   }
