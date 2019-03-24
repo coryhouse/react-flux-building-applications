@@ -4,7 +4,12 @@ import { Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import courseStore from "../../stores/courseStore";
 import authorStore from "../../stores/authorStore";
-import { updateCourse, createCourse } from "../../actions/courseActions";
+import {
+  updateCourse,
+  createCourse,
+  loadCourses
+} from "../../actions/courseActions";
+import { loadAuthors } from "../../actions/authorActions";
 
 function ManageCoursePage({ match, history }) {
   const [course, setCourse] = useState({
@@ -18,24 +23,32 @@ function ManageCoursePage({ match, history }) {
   const [errors, setErrors] = useState({});
   const [redirectTo404Page, setRedirectTo404Page] = useState(false);
 
-  // Subscribe/Unsub to Flux store
   const onChange = useCallback(() => {
-    debugger;
-    setCourse(courseStore.getCourses());
+    const _course = courseStore.getCourseById(match.params.id);
+    if (_course) setCourse(_course);
     setAuthors(authorStore.getAuthors());
   });
 
+  // Subscribe/Unsub to Flux store
   useEffect(() => {
-    courseStore.addChangeListener(() => alert("onChange"));
-    return () => courseStore.removeChangeListener(onChange);
+    courseStore.addChangeListener(onChange);
+    authorStore.addChangeListener(onChange);
+
+    if (courseStore.getCourses().length === 0) loadCourses();
+    if (authorStore.getAuthors().length === 0) loadAuthors();
+
+    // Cleanup on unmount
+    return () => {
+      courseStore.removeChangeListener(onChange);
+      authorStore.removeChangeListener(onChange);
+    };
   }, []);
 
   useEffect(() => {
     const courseId = match.params.id;
     if (courseId) {
-      const course = courseStore.getCourseById(courseId);
-      console.log(course);
-      course ? setCourse(course) : setRedirectTo404Page(true);
+      const _course = courseStore.getCourseById(courseId);
+      course ? setCourse(_course) : setRedirectTo404Page(true);
     }
   }, [match]);
 
