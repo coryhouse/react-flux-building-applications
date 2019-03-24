@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import courseStore from "../../stores/courseStore";
 import authorStore from "../../stores/authorStore";
-import { updateCourse } from "../../actions/courseActions";
+import { updateCourse, loadCourses } from "../../actions/courseActions";
 
 class ManageCoursePage extends React.Component {
   constructor(props) {
@@ -30,6 +30,11 @@ class ManageCoursePage extends React.Component {
   }
 
   componentDidMount() {
+    if (courseStore.getCourses().length === 0) {
+      loadCourses();
+      return;
+    }
+
     const courseId = this.props.match.params.id;
     if (courseId) {
       const course = courseStore.getCourseById(courseId);
@@ -41,17 +46,26 @@ class ManageCoursePage extends React.Component {
 
   componentWillMount() {
     courseStore.addChangeListener(this.onChange);
+    authorStore.addChangeListener(this.onChange);
   }
 
   componentWillUnmount() {
     courseStore.removeChangeListener(this.onChange);
+    authorStore.removeChangeListener(this.onChange);
   }
 
   onChange = () => {
-    this.setState({
-      courses: courseStore.getCourses(),
-      authors: authorStore.getAuthors()
-    });
+    const courses = courseStore.getCourses();
+    if (courses.length > 0) {
+      this.setState({
+        authors: authorStore.getAuthors(),
+        course: courseStore.getCourseById(this.props.match.params.id)
+      });
+    } else {
+      this.setState({
+        authors: authorStore.getAuthors()
+      });
+    }
   };
 
   componentWillReceiveProps(nextProps) {
