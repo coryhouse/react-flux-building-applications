@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
@@ -23,33 +23,40 @@ function ManageCoursePage({ match, history }) {
   const [errors, setErrors] = useState({});
   const [redirectTo404Page, setRedirectTo404Page] = useState(false);
 
-  const onChange = useCallback(() => {
+  const onCourseStoreChange = () => {
     const _course = courseStore.getCourseById(match.params.id);
     if (_course) setCourse(_course);
+  };
+
+  const onAuthorStoreChange = () => {
     setAuthors(authorStore.getAuthors());
-  });
+  };
 
-  // Subscribe/Unsub to Flux store
+  // Sub/Unsub to Flux stores
   useEffect(() => {
-    courseStore.addChangeListener(onChange);
-    authorStore.addChangeListener(onChange);
-
-    if (courseStore.getCourses().length === 0) loadCourses();
-    if (authorStore.getAuthors().length === 0) loadAuthors();
+    courseStore.addChangeListener(onCourseStoreChange);
+    authorStore.addChangeListener(onAuthorStoreChange);
 
     // Cleanup on unmount
     return () => {
-      courseStore.removeChangeListener(onChange);
-      authorStore.removeChangeListener(onChange);
+      courseStore.removeChangeListener(onCourseStoreChange);
+      authorStore.removeChangeListener(onAuthorStoreChange);
     };
   }, []);
 
   useEffect(() => {
-    const courseId = match.params.id;
-    if (courseId) {
-      const _course = courseStore.getCourseById(courseId);
-      course ? setCourse(_course) : setRedirectTo404Page(true);
+    const courses = courseStore.getCourses();
+    if (courses.length === 0) {
+      loadCourses();
+    } else {
+      const courseId = match.params.id;
+      if (courseId) {
+        const _course = courseStore.getCourseById(courseId);
+        course ? setCourse(_course) : setRedirectTo404Page(true);
+      }
     }
+
+    if (authorStore.getAuthors().length === 0) loadAuthors();
   }, [match]);
 
   function handleChange({ target }) {
