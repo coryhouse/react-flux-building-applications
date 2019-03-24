@@ -26,7 +26,7 @@ class ManageCoursePage extends React.Component {
       redirectTo404Page: false
     };
 
-    this.updateCourseState = this.updateCourseState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.saveCourse = this.saveCourse.bind(this);
   }
 
