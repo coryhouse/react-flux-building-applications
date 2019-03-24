@@ -22,7 +22,6 @@ class ManageCoursePage extends React.Component {
       authors: authorStore.getAuthors(),
       errors: {},
       saving: false,
-      redirectToCoursePage: false,
       redirectTo404Page: false
     };
 
@@ -84,34 +83,15 @@ class ManageCoursePage extends React.Component {
 
   saveCourse(event) {
     event.preventDefault();
-
-    if (!this.courseFormIsValid()) {
-      return;
-    }
-
+    if (!this.courseFormIsValid()) return;
     updateCourse(this.state.course);
-    this.redirectToCoursePage();
-  }
-
-  redirectToCoursePage() {
-    this.setState({
-      saving: false,
-      redirectToCoursePage: true
-    });
-    alert("Course saved");
+    this.props.history.push("/courses");
   }
 
   render() {
-    const {
-      redirectTo404Page,
-      redirectToCoursePage,
-      authors,
-      course,
-      errors,
-      saving
-    } = this.state;
-    if (redirectToCoursePage) return <Redirect to={{ pathname: "/courses" }} />;
-    if (redirectTo404Page) return <Redirect to={{ pathName: "/404" }} />;
+    const { redirectTo404Page, authors, course, errors, saving } = this.state;
+    // Showing alternative redirect approach
+    if (redirectTo404Page) return <Redirect to="/404" />;
 
     return (
       <div>
