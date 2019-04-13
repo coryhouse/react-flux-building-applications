@@ -1,12 +1,14 @@
 import React from "react";
 
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-      This app uses React.
-    </div>
-  );
+class AboutPage extends React.Component {
+  render() {
+    return (
+      <>
+        <h2>About</h2>
+        <p>This app uses React.</p>
+      </>
+    );
+  }
 }
 
-export default About;
+export default AboutPage;
