@@ -11,7 +11,7 @@ const TextInput = ({
   error
 }) => {
   let wrapperClass = "form-group";
-  if (error && error.length > 0) {
+  if (error.length > 0) {
     wrapperClass += " has-error";
   }
 
@@ -42,6 +42,10 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   error: PropTypes.string
+};
+
+TextInput.defaultProps = {
+  error: ""
 };
 
 export default TextInput;
