@@ -1,6 +1,6 @@
-import dispatcher from "../dispatcher/appDispatcher";
+import dispatcher from "../appDispatcher";
 import * as courseApi from "../api/courseApi";
-import actionTypes from "../constants/actionTypes";
+import actionTypes from "./actionTypes";
 
 export function loadCourses() {
   courseApi.getCourses().then(courses => {

@@ -1,6 +1,6 @@
-import dispatcher from "../dispatcher/appDispatcher";
+import dispatcher from "../appDispatcher";
 import * as authorApi from "../api/authorApi";
-import actionTypes from "../constants/actionTypes";
+import actionTypes from "./actionTypes";
 
 export function loadAuthors() {
   authorApi.getAuthors().then(authors => {
