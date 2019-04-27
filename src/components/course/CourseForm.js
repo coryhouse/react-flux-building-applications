@@ -8,6 +8,7 @@ function CourseForm({ course, authors, onSubmit, onChange, errors }) {
     <form onSubmit={onSubmit}>
       <h2>Manage Course</h2>
       <TextInput
+        id="title"
         name="title"
         label="Title"
         value={course.title}
@@ -31,6 +32,7 @@ function CourseForm({ course, authors, onSubmit, onChange, errors }) {
       />
 
       <TextInput
+        id="category"
         name="category"
         label="Category"
         value={course.category}
@@ -48,8 +50,7 @@ CourseForm.propTypes = {
   authors: PropTypes.array.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
-  errors: PropTypes.object
+  errors: PropTypes.object.isRequired
 };
 
 export default CourseForm;
