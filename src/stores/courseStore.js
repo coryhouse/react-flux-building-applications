@@ -29,7 +29,7 @@ class courseStore extends EventEmitter {
 
 const store = new courseStore();
 
-Dispatcher.register(function(action) {
+Dispatcher.register(action => {
   switch (action.actionType) {
     case actionTypes.LOAD_COURSES:
       _courses = action.courses;
