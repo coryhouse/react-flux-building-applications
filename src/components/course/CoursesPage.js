@@ -5,12 +5,9 @@ import { deleteCourse, loadCourses } from "../../actions/courseActions";
 import { Link } from "react-router-dom";
 
 class CoursesPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      courses: courseStore.getCourses()
-    };
-  }
+  state = {
+    courses: courseStore.getCourses()
+  };
 
   componentDidMount() {
     if (courseStore.getCourses().length === 0) loadCourses();
