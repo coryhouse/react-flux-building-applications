@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./common/Header";
 import HomePage from "./HomePage";
-import CoursesPage from "./course/CoursesPage";
+import CoursesPage from "./course/CoursesPage.Hooks";
 import ManageCoursePage from "./course/ManageCoursePage.Hooks"; //eslint-disable-line import/no-named-as-default
 import AboutPage from "./about/AboutPage";
 import NotFoundPage from "./NotFoundPage";
