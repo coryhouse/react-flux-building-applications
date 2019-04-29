@@ -3,7 +3,7 @@ import * as courseApi from "../api/courseApi";
 import actionTypes from "./actionTypes";
 
 export function loadCourses() {
-  courseApi.getCourses().then(courses => {
+  return courseApi.getCourses().then(courses => {
     dispatcher.dispatch({
       actionType: actionTypes.LOAD_COURSES,
       courses
@@ -11,30 +11,24 @@ export function loadCourses() {
   });
 }
 
-export function createCourse(course) {
-  courseApi.saveCourse(course).then(newCourse => {
-    //Hey dispatcher, go tell all the stores that an author was just created.
+export function saveCourse(course) {
+  return courseApi.saveCourse(course).then(savedCourse => {
     dispatcher.dispatch({
-      actionType: actionTypes.CREATE_COURSE,
-      course: newCourse
+      actionType: course.id
+        ? actionTypes.UPDATE_COURSE
+        : actionTypes.CREATE_COURSE,
+      course: savedCourse
     });
-  });
-}
-
-export function updateCourse(course) {
-  courseApi.saveCourse(course).then(updatedCourse => {
-    dispatcher.dispatch({
-      actionType: actionTypes.UPDATE_COURSE,
-      course: updatedCourse
-    });
+    return savedCourse;
   });
 }
 
 export function deleteCourse(id) {
-  courseApi.deleteCourse(id).then(() => {
+  return courseApi.deleteCourse(id).then(() => {
     dispatcher.dispatch({
       actionType: actionTypes.DELETE_COURSE,
       id: id
     });
+    return;
   });
 }
