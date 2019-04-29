@@ -5,11 +5,11 @@ import CourseList from "./CourseList";
 import { Link } from "react-router-dom";
 
 function CoursesPage() {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(courseStore.getCourses());
 
   useEffect(() => {
     courseStore.addChangeListener(onChange);
-    if (courseStore.getCourses().length === 0) loadCourses();
+    if (courses.length === 0) loadCourses();
     return () => courseStore.removeChangeListener(onChange); // cleanup on unmount
   }, []);
 
