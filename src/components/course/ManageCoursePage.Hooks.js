@@ -4,12 +4,9 @@ import { Redirect } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import courseStore from "../../stores/courseStore";
 import authorStore from "../../stores/authorStore";
-import {
-  updateCourse,
-  createCourse,
-  loadCourses
-} from "../../actions/courseActions";
-import { loadAuthors } from "../../actions/authorActions";
+import * as courseActions from "../../actions/courseActions";
+import * as authorActions from "../../actions/authorActions";
+import { toast } from "react-toastify";
 
 function ManageCoursePage({ match, history }) {
   const [course, setCourse] = useState({
@@ -47,7 +44,7 @@ function ManageCoursePage({ match, history }) {
   useEffect(() => {
     const courses = courseStore.getCourses();
     if (courses.length === 0) {
-      loadCourses();
+      courseActions.loadCourses();
     } else {
       const courseId = match.params.id;
       if (courseId) {
@@ -56,7 +53,7 @@ function ManageCoursePage({ match, history }) {
       }
     }
 
-    if (authorStore.getAuthors().length === 0) loadAuthors();
+    if (authorStore.getAuthors().length === 0) authorActions.loadAuthors();
   }, [match]);
 
   function handleChange({ target }) {
@@ -79,8 +76,10 @@ function ManageCoursePage({ match, history }) {
   function saveCourse(event) {
     event.preventDefault();
     if (!formIsValid()) return;
-    course.id ? updateCourse(course) : createCourse(course);
-    history.push("/courses");
+    courseActions.saveCourse(course).then(() => {
+      history.push("/courses");
+      toast.success("Course saved.");
+    });
   }
 
   // Showing alternative redirect approach
