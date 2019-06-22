@@ -1,26 +1,23 @@
-"use strict";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+function Header() {
+  const activeStyle = { color: "orange" };
+  return (
+    <nav>
+      <NavLink activeStyle={activeStyle} exact to="/">
+        Home
+      </NavLink>
+      {" | "}
+      <NavLink activeStyle={activeStyle} to="/courses">
+        Courses
+      </NavLink>
+      {" | "}
+      <NavLink activeStyle={activeStyle} to="/about">
+        About
+      </NavLink>
+    </nav>
+  );
+}
 
-var Header = React.createClass({
-	render: function() {
-		return (
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-              <Link to="app" className="navbar-brand">
-                <img src="images/pluralsight-logo.png" />
-              </Link>
-              <ul className="nav navbar-nav">
-                <li><Link to="app">Home</Link></li>
-                <li><Link to="authors">Authors</Link></li>
-                <li><Link to="about">About</Link></li>
-              </ul>
-          </div>
-        </nav>
-		);
-	}
-});
-
-module.exports = Header;
+export default Header;

@@ -1,21 +1,30 @@
-/*eslint-disable strict */ //Disabling check because we can't run strict mode. Need global vars.
+import React from "react";
+import HomePage from "./HomePage";
+import AboutPage from "./AboutPage";
+import Header from "./common/Header";
+import CoursesPage from "./CoursesPage";
+import { Route, Switch, Redirect } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
+import ManageCoursePage from "./ManageCoursePage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-var React = require('react');
-var Header = require('./common/header');
-var RouteHandler = require('react-router').RouteHandler;
-$ = jQuery = require('jquery');
+function App() {
+  return (
+    <div className="container-fluid">
+      <ToastContainer autoClose={3000} hideProgressBar />
+      <Header />
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/courses" component={CoursesPage} />
+        <Route path="/about" component={AboutPage} />
+        <Route path="/course/:slug" component={ManageCoursePage} />
+        <Route path="/course" component={ManageCoursePage} />
+        <Redirect from="/about-page" to="about" />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </div>
+  );
+}
 
-var App = React.createClass({
-	render: function() {
-		return (
-			<div>
-				<Header/>
-				<div className="container-fluid">
-					<RouteHandler/>
-				</div>
-			</div>
-		);
-	}
-});
-
-module.exports = App;
+export default App;

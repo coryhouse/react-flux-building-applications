@@ -1,39 +1,41 @@
-"use strict";
+import React from "react";
+import PropTypes from "prop-types";
 
-var React = require('react');
-
-var Input = React.createClass({
-  propTypes: {
-    name: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    placeholder: React.PropTypes.string,
-    value: React.PropTypes.string,
-    error: React.PropTypes.string
-  },
-
-  render: function () {
-    var wrapperClass = 'form-group';
-    if (this.props.error && this.props.error.length > 0) {
-      wrapperClass += " " + 'has-error';
-    }
-    
-    return (
-     <div className={wrapperClass}>
-        <label htmlFor={this.props.name}>{this.props.label}</label>
-        <div className="field">
-          <input type="text"
-            name={this.props.name}
-            className="form-control"
-            placeholder={this.props.placeholder}
-            ref={this.props.name}
-            value={this.props.value}
-            onChange={this.props.onChange} />
-          <div className="input">{this.props.error}</div>
-        </div>
-      </div>
-    );
+function TextInput(props) {
+  let wrapperClass = "form-group";
+  if (props.error.length > 0) {
+    wrapperClass += " has-error";
   }
-});
 
-module.exports = Input;
+  return (
+    <div className={wrapperClass}>
+      <label htmlFor={props.id}>{props.label}</label>
+      <div className="field">
+        <input
+          id={props.id}
+          type="text"
+          onChange={props.onChange}
+          name={props.name}
+          className="form-control"
+          value={props.value}
+        />
+      </div>
+      {props.error && <div className="alert alert-danger">{props.error}</div>}
+    </div>
+  );
+}
+
+TextInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  error: PropTypes.string
+};
+
+TextInput.defaultProps = {
+  error: ""
+};
+
+export default TextInput;

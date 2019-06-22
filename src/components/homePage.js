@@ -1,19 +1,16 @@
-"use strict";
+import React from "react";
+import { Link } from "react-router-dom";
 
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+function HomePage() {
+  return (
+    <div className="jumbotron">
+      <h1>Pluralsight Administration</h1>
+      <p>React, Flux, and React Router for ultra-responsive web apps.</p>
+      <Link to="about" className="btn btn-primary">
+        About
+      </Link>
+    </div>
+  );
+}
 
-var Home = React.createClass({
-	render: function() {
-		return (
-			<div className="jumbotron">
-				<h1>Pluralsight Administration</h1>
-				<p>React, React Router, and Flux for ultra-responsive web apps.</p>
-				<Link to="about" className="btn btn-primary btn-lg">Learn more</Link>
-			</div>
-		);
-	}
-});
-
-module.exports = Home;
+export default HomePage;
